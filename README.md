@@ -9,6 +9,11 @@ Om Singh                       20185092
 Shrawan Ku. Choudhary     20184057
 Project - Strange Flix
 
+-------------------
+
+message from shrawan: sign in / google sign , to daal diya h pr abhi redirect nhi set kiya h example sign in k baad wala part 
+
+-------------------
 
 
 Proposed Features
