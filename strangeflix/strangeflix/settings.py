@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'django.contrib.sites',
     'allauth',
+    'storages',
     'allauth.account',
     'allauth.socialaccount',
 
@@ -136,3 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+AWS_SECRET_ACCESS_KEY="4+M2aT1W5BKuxblp+TO3RpfT/0+eDHfdM8ILxYpF"
+AWS_ACCESS_KEY_ID="AKIAWRV6B22ZANC3E2FQ"
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'strangeflix'
+AWS_S3_REGION_NAME = 'ap-south-1'   

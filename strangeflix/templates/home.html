@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-{% load socialaccount %}
+{% load socialaccount %} {% load static %}
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,50 +9,80 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/car.css' %}">
 
     <title>StrangeFlix</title>
 </head>
 
-<body>
+<body style="background-color: black;color: aliceblue;">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'home' %}">StrangeFlix</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand " href="{% url 'home' %} ">StrangeFlix</a>
+        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon "></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+        <div class="collapse navbar-collapse " id="navbarText ">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Pricing</a>
                 </li>
             </ul>
-            <span class="navbar-text">
+            <span class="navbar-text ">
             {% load i18n %}
             {% if user.is_authenticated %}
-                <form method="post" action="{% url 'account_logout' %}">
+                <form method="post " action="{% url 'account_logout' %} ">
                     {% csrf_token %}
                     {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    <input type="hidden " name="{{ redirect_field_name }} " value="{{ redirect_field_value }} "/>
                     {% endif %}
-                    <button type="submit" class="btn btn-primary btn-sm">{% trans 'Sign Out' %}</button>
+                    <button type="submit " class="btn btn-primary btn-sm ">{% trans 'Sign Out' %}</button>
                 </form>
                 
                 
                 {% else %}
-                <a class="btn btn-primary btn-sm" href="http://127.0.0.1:8000/accounts/login/" role="button">Login/Sign-up</a>
+                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
                 {% endif %}
             </span>
         </div>
     </nav>
-
-    
-
+    <div class="jumbotron" style="background-color: black;">
+        <h1 class=" display-4 ">Top 5 movies in India</h1>
+        <div class="carouSel ">
+            <div class="carouSel-row ">
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 1</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 2</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 3</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 4</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
+            </div>
+        </div>
+        <h1 class=" display-4 ">Top 5 Tv series in India</h1>
+        <div class="carouSel ">
+            <div class="carouSel-row ">
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 1</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 2</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 3</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 4</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
+            </div>
+        </div>
+        <h1 class=" display-4 ">Top 5 Videos in India</h1>
+        <div class="carouSel ">
+            <div class="carouSel-row ">
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 1</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 2</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 3</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 4</div>
+                <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>
 
 </html>

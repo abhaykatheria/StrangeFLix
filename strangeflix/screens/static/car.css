@@ -1,0 +1,103 @@
+:root {
+    /* Tile Dimensions */
+    --carouSel-tile-spacing: 10px;
+    --carouSel-tile-width: 280px;
+    --carouSel-tile-height: calc(var(--carouSel-tile-width) / (16 / 9));
+    /* Growth Factor */
+    --carouSel-growth-factor: 1.5;
+    /* Fade to Opacity */
+    --carouSel-fade-opacity: 0.25;
+    --carouSel-normal-opacity: 1;
+    /* Automatic Offsets - DO NOT ALTER */
+    --carouSel-offset-left: calc(-1 * (var(--carouSel-tile-width) * (var(--carouSel-growth-factor) - 1) / 2));
+    --carouSel-offset-right: calc(var(--carouSel-tile-width) * (var(--carouSel-growth-factor) - 1));
+    /* Transition Speeds */
+    --carouSel-transition-1: 1s;
+    --carouSel-transition-2: 0.5s;
+    --carouSel-transition-3: 0.3s;
+}
+
+
+/* carouSel Container */
+
+.carouSel {
+    margin: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* carouSel Row */
+
+.carouSel-row {
+    white-space: nowrap;
+    margin-top: calc((var(--carouSel-tile-height) * (var(--carouSel-growth-factor) - 1)) / 2);
+    margin-bottom: calc((var(--carouSel-tile-height) * (var(--carouSel-growth-factor) - 1)) / 2);
+    margin-left: calc((var(--carouSel-tile-width) * (var(--carouSel-growth-factor) - 1)) / 2);
+    margin-right: calc((var(--carouSel-tile-width) * (var(--carouSel-growth-factor) - 1)) / 2);
+    transition: var(--carouSel-transition-2);
+}
+
+
+/* Content Tile */
+
+.carouSel-tile {
+    position: relative;
+    display: inline-block;
+    width: var(--carouSel-tile-width);
+    height: var(--carouSel-tile-height);
+    margin-right: var(--carouSel-tile-spacing);
+    transition: var(--carouSel-transition-2);
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+    cursor: pointer;
+    cursor: hand;
+}
+
+
+/* Add Extra Margin to Last carouSel Tile */
+
+.carouSel-tile:last-of-type {
+    margin-right: calc(var(--carouSel-tile-width)/2);
+}
+
+
+/* Ensure All Elements Inside Tile are Block */
+
+.carouSel-tile * {
+    display: block;
+}
+
+
+/* carouSel Row on Hover */
+
+.carouSel-row:hover {
+    -webkit-transform: translate3d(var(--carouSel-offset-left), 0, 0);
+    transform: translate3d(var(--carouSel-offset-left), 0, 0);
+}
+
+
+/* Content Tile on carouSel Row Hover */
+
+.carouSel-row:hover .carouSel-tile {
+    opacity: var(--carouSel-fade-opacity);
+}
+
+
+/* Content Tile on Hover on carouSel Row Hover */
+
+.carouSel-row:hover .carouSel-tile:hover {
+    -webkit-transform: scale(var(--carouSel-growth-factor));
+    transform: scale(var(--carouSel-growth-factor));
+    opacity: var(--carouSel-normal-opacity);
+}
+
+
+/* Content Tile on Hover */
+
+.carouSel-tile:hover~.carouSel-tile {
+    -webkit-transform: translate3d(var(--carouSel-offset-right), 0, 0);
+    transform: translate3d(var(--carouSel-offset-right), 0, 0);
+}
