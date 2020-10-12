@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -137,6 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/show_media/'
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'show_media')
+
 
 
 AWS_SECRET_ACCESS_KEY="4+M2aT1W5BKuxblp+TO3RpfT/0+eDHfdM8ILxYpF"

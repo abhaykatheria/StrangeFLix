@@ -1,23 +1,27 @@
+{% extends 'new_base.html' %}
+
+{% block content %}
+
 <!doctype html>
 <html lang="en">
-{% load socialaccount %} {% load static %}
+
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static '/car.css' %}">
-
     <title>StrangeFlix</title>
+    <style>
+        .carousel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body style="background-color: black;color: aliceblue;">
+       
 
     <nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand " href="{% url 'home' %} ">StrangeFlix</a>
+        <a class="navbar-brand " href="#">StrangeFlix</a>
         <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
             <span class="navbar-toggler-icon "></span>
         </button>
@@ -46,16 +50,25 @@
         </div>
     </nav>
     <div class="jumbotron" style="background-color: black;">
-        <h1 class=" display-4 ">Top 5 movies in India</h1>
+        <h1 class=" display-4 ">
+        {% for item in object_list %}
+        
+
+        Top 5 Course in India</h1>
         <div class="carouSel ">
             <div class="carouSel-row ">
-                <div class="carouSel-tile " style="background-color: aqua; ">Tile 1</div>
-                <div class="carouSel-tile " style="background-color: aqua; ">Tile 2</div>
-                <div class="carouSel-tile " style="background-color: aqua; ">Tile 3</div>
-                <div class="carouSel-tile " style="background-color: aqua; ">Tile 4</div>
-                <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
+                <div class="carouSel-tile">
+                    <!--Card image-->
+                    <div class="view overlay">
+                      
+                      <a href="{{ item.file.url }}"">
+                        <h6 style="text-align: center;"> {{item.name}} </h6>
+                        <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
+                      </a>
+                    </div>
             </div>
         </div>
+        {% endfor %}
         <h1 class=" display-4 ">Top 5 Tv series in India</h1>
         <div class="carouSel ">
             <div class="carouSel-row ">
@@ -86,3 +99,4 @@
 </body>
 
 </html>
+{% endblock content %}
