@@ -8,3 +8,6 @@ class Movie(models.Model):
     thumbnail = models.FileField()
     views = models.IntegerField()
 
+    def _str_(self):
+        return self.name
+
