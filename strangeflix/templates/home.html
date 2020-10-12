@@ -32,23 +32,66 @@
                 </li>
             </ul>
             <span class="navbar-text ">
-            {% load i18n %}
-            {% if user.is_authenticated %}
-                <form method="post " action="{% url 'account_logout' %} ">
-                    {% csrf_token %}
-                    {% if redirect_field_value %}
-                    <input type="hidden " name="{{ redirect_field_name }} " value="{{ redirect_field_value }} "/>
+                {% load i18n %}
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
+                        </form>
+                    {% else %}
+                    <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
                     {% endif %}
-                    <button type="submit " class="btn btn-primary btn-sm ">{% trans 'Sign Out' %}</button>
-                </form>
-                
-                
-                {% else %}
-                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
-                {% endif %}
-            </span>
+                </span>
         </div>
     </nav>
+
+    <div class="jumbotron" style="background-color: black; padding-bottom: 0%;">
+        <div class="container container-fluid" style="height: 50vh;">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 50vh;">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height: 50vh;">
+                        <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.gadgets360cdn.com%2Flarge%2Fthe-expanse-season-3_1523432599660.jpg" height="50vh" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>The Expanse</h5>
+                            <p>Story of th extra-terrestials</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height: 50vh;">
+                        <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.tvovermind.com%2Fwp-content%2Fuploads%2F2018%2F11%2FNaruto-Shipp%25C5%25ABden.jpg" height="50vh" alt=" Second slide ">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Naruto</h5>
+                            <p>Dattebayo</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item " style="height: 50vh;">
+                        <img class="img-fluid" src="https://cdn3.movieweb.com/i/article/xOw6msJtL2YtlnEra7vglma6eLW0yP/1200:100/Matrix-Movie-Code-Secret-Sushi-Recipes.jpg " height="50vh" alt="Third slide ">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>The Matrix</h5>
+                            <p>Glitch in the matrix</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev " href="#carouselExampleIndicators " role="button " data-slide="prev ">
+                    <span class="carousel-control-prev-icon " aria-hidden="true "></span>
+                    <span class="sr-only ">Previous</span>
+                </a>
+                <a class="carousel-control-next " href="#carouselExampleIndicators " role="button " data-slide="next ">
+                    <span class="carousel-control-next-icon " aria-hidden="true "></span>
+                    <span class="sr-only ">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
     <div class="jumbotron" style="background-color: black;">
         <h1 class=" display-4 ">
         {% for item in object_list %}
