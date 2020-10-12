@@ -1,8 +1,15 @@
 from django.urls import path, include
-from . import views
+from .views import (
+    HomeView, WelcomeScreen,
+    PriceView,
+)
+
+app_name = "screens"
 
 urlpatterns = [
-    path('', views.home,name='home'),
-    path('loggedin/', views.home, name="loggedin"),
+    #path('', welcome_screen,name='home'),
+    path('', WelcomeScreen.as_view(), name="welcome"),
+    path('loggedin/', HomeView.as_view(), name="loggedin"),
+    path('price-list/', PriceView.as_view(), name="price"),
     #path('/accounts', include('allauth.urls')),
 ]

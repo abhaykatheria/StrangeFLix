@@ -1,10 +1,21 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Movie
+from django.views.generic import TemplateView, ListView, DeleteView
+from django.utils.decorators import method_decorator
 
 
-def loggedin(request):
-    return HttpResponse("Aoo RAja")
+@method_decorator(login_required, name='dispatch')
+class HomeView(ListView):
+    model = Movie
+    template_name = "home.html"
 
-def home(request):
-    #return HttpResponse('<h1>GO BACK</h>')
-    return render(request, 'home.html')
+
+class WelcomeScreen(TemplateView):
+    template_name = "welcome.html"
+
+
+class PriceView(TemplateView):
+    template_name = "price.html"

@@ -1,48 +1,55 @@
+{% extends 'new_base.html' %}
+
+{% block content %}
+
 <!doctype html>
 <html lang="en">
-{% load socialaccount %} {% load static %}
+
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static '/car.css' %}">
-
     <title>StrangeFlix</title>
+    <style>
+        .carousel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body style="background-color: black;color: aliceblue;">
+       
 
     <nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand " href="{% url 'home' %} ">StrangeFlix</a>
+        <a class="navbar-brand " href="#">StrangeFlix</a>
         <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
             <span class="navbar-toggler-icon "></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarText ">
             <ul class="navbar-nav mr-auto ">
                 <li class="nav-item ">
-                    <a class="nav-link " href="# ">Pricing</a>
+                    <a class="nav-link " href="http://127.0.0.1:8000/price-list/">Pricing</a>
                 </li>
             </ul>
             <span class="navbar-text ">
-            {% load i18n %}
-            {% if user.is_authenticated %}
-                <form method="post" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+
+                {% load i18n %}
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
+                        </form>
+                    {% else %}
+                    <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
                     {% endif %}
-                    Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
-                    </form>
-                {% else %}
-                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
-                {% endif %}
-            </span>
+                </span>
         </div>
     </nav>
+
+
     <div class="jumbotron" style="background-color: black; padding-bottom: 0%;">
         <div class="container container-fluid" style="height: 50vh;">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 50vh;">
@@ -82,6 +89,7 @@
                     <span class="carousel-control-next-icon " aria-hidden="true "></span>
                     <span class="sr-only ">Next</span>
                 </a>
+<<<<<<< HEAD
             </div>
         </div>
     </div>
@@ -95,8 +103,32 @@
                 <div class="carouSel-tile " style="background-color: aqua; ">Tile 3</div>
                 <div class="carouSel-tile " style="background-color: aqua; ">Tile 4</div>
                 <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
+=======
+>>>>>>> upload
             </div>
         </div>
+    </div>
+
+
+    <div class="jumbotron" style="background-color: black;">
+        <h1 class=" display-4 ">
+        {% for item in object_list %}
+            Top 5 Course in India</h1>
+            <div class="carouSel ">
+                <div class="carouSel-row ">
+                    <div class="carouSel-tile">
+                        <!--Card image-->
+                        <div class="view overlay">
+                        
+                        <a href="{{ item.file.url }}"">
+                            <h6 style="text-align: center;"> {{item.name}} </h6>
+                            <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         <h1 class=" display-4 ">Top 5 Tv series in India</h1>
         <div class="carouSel ">
             <div class="carouSel-row ">
@@ -117,7 +149,7 @@
                 <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
             </div>
         </div>
-    </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -132,3 +164,4 @@
 </body>
 
 </html>
+{% endblock content %}

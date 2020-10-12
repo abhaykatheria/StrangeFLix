@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -137,10 +138,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/show_media/'
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'show_media')
 
 
-AWS_SECRET_ACCESS_KEY="4+M2aT1W5BKuxblp+TO3RpfT/0+eDHfdM8ILxYpF"
-AWS_ACCESS_KEY_ID="AKIAWRV6B22ZANC3E2FQ"
+
+
+
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'strangeflix'
