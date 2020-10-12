@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse " id="navbarText ">
             <ul class="navbar-nav mr-auto ">
                 <li class="nav-item ">
-                    <a class="nav-link " href="# ">Pricing</a>
+                    <a class="nav-link " href="http://127.0.0.1:8000/price-list/">Pricing</a>
                 </li>
             </ul>
             <span class="navbar-text ">
@@ -95,22 +95,21 @@
     <div class="jumbotron" style="background-color: black;">
         <h1 class=" display-4 ">
         {% for item in object_list %}
-        
-
-        Top 5 Course in India</h1>
-        <div class="carouSel ">
-            <div class="carouSel-row ">
-                <div class="carouSel-tile">
-                    <!--Card image-->
-                    <div class="view overlay">
-                      
-                      <a href="{{ item.file.url }}"">
-                        <h6 style="text-align: center;"> {{item.name}} </h6>
-                        <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
-                      </a>
+            Top 5 Course in India</h1>
+            <div class="carouSel ">
+                <div class="carouSel-row ">
+                    <div class="carouSel-tile">
+                        <!--Card image-->
+                        <div class="view overlay">
+                        
+                        <a href="{{ item.file.url }}"">
+                            <h6 style="text-align: center;"> {{item.name}} </h6>
+                            <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
+                        </a>
+                        </div>
                     </div>
+                </div>
             </div>
-        </div>
         {% endfor %}
         <h1 class=" display-4 ">Top 5 Tv series in India</h1>
         <div class="carouSel ">
@@ -132,7 +131,7 @@
                 <div class="carouSel-tile " style="background-color: aqua; ">Tile 5</div>
             </div>
         </div>
-    </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
