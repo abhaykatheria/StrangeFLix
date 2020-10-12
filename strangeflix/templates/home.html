@@ -32,22 +32,21 @@
                 </li>
             </ul>
             <span class="navbar-text ">
-                {% load i18n %}
-                {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                        {% endif %}
-                        Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
-                        </form>
-                    {% else %}
-                    <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
+            {% load i18n %}
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
-                </span>
+                    Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
+                    </form>
+                {% else %}
+                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
+                {% endif %}
+            </span>
         </div>
-    </nav>
-
+  </nav>
     <div class="jumbotron" style="background-color: black; padding-bottom: 0%;">
         <div class="container container-fluid" style="height: 50vh;">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 50vh;">
@@ -92,21 +91,23 @@
     </div>
 
 
+
     <div class="jumbotron" style="background-color: black;">
         <h1 class=" display-4 ">
+          Top 5 Course in India</h1>
         {% for item in object_list %}
-            Top 5 Course in India</h1>
-            <div class="carouSel ">
-                <div class="carouSel-row ">
-                    <div class="carouSel-tile">
-                        <!--Card image-->
-                        <div class="view overlay">
-                        
-                        <a href="{{ item.file.url }}"">
-                            <h6 style="text-align: center;"> {{item.name}} </h6>
-                            <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
-                        </a>
-                        </div>
+
+        <div class="carouSel ">
+            <div class="carouSel-row ">
+                <div class="carouSel-tile">
+                    <!--Card image-->
+                    <div class="view overlay">
+                      
+                      <a href="{{ item.file.url }}"">
+                        <h6 style="text-align: center;"> {{item.name}} </h6>
+                        <img class="carousel-img" src="{{ item.thumbnail.url }}" alt="">
+                      </a>
+
                     </div>
                 </div>
             </div>
@@ -138,6 +139,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script>
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    </script>
 </body>
 
 </html>
