@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 # Create your models here.
 class Movie(models.Model):  
@@ -8,6 +9,9 @@ class Movie(models.Model):
     thumbnail = models.FileField()
     views = models.IntegerField()
 
-    def _str_(self):
+    def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('screens:movie_detail', args=[str(self.id)])
 
