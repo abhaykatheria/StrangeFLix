@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import (
     HomeView, WelcomeScreen,
     PriceView, PaymentView,
-    SelectPlanView
+    SelectPlanView, MovieDetailView
 )
 
 app_name = "screens"
@@ -15,4 +15,5 @@ urlpatterns = [
     path('planform/payment/', PaymentView.as_view(), name="payment"),
     path('planform/', SelectPlanView.as_view(), name="planform"),
     #path('/accounts', include('allauth.urls')),
+    path('<int:pk>/', MovieDetailView.as_view(), name='movie_detail'),
 ]
