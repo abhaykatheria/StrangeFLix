@@ -48,7 +48,9 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.google',
 
-    'screens'
+    'screens',
+    'crispy_forms',
+    'paypal.standard.ipn',
 ]
 
 SITE_ID = 1
@@ -134,6 +136,10 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -147,3 +153,8 @@ MEDIA_ROOT  = os.path.join(BASE_DIR, 'show_media')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'strangeflix'
 AWS_S3_REGION_NAME = 'ap-south-1'   
+
+# django PayPal settings
+
+PAYPAL_RECEIVER_EMAIL = 'shrawan07090@gmail.com'
+PAYPAL_TEST = True
