@@ -158,3 +158,6 @@ AWS_S3_REGION_NAME = 'ap-south-1'
 
 PAYPAL_RECEIVER_EMAIL = 'shrawan07090@gmail.com'
 PAYPAL_TEST = True
+
+# stripe secret key
+STRIPE_SECRET_KEY = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"

@@ -9,3 +9,6 @@ PLAN_CHOICES = (
 class SelectPlanForm(forms.Form):
     plan_option = forms.ChoiceField(
         widget=forms.RadioSelect(),choices=PLAN_CHOICES)
+
+class PaymentForm(forms.Form):
+    stripeToken = forms.CharField(required=False)
