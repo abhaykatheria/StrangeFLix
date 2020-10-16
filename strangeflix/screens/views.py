@@ -33,7 +33,7 @@ class SearchResultsView(ListView):
     def get_queryset(self): 
         query = self.request.GET.get('q')
         res = Movie.objects.filter(
-            Q(name__icontains=query) | Q(genre__icontains=query)
+            Q(name__icontains=query) | Q(genre__icontains=query) | Q(director__icontains=query)| Q(actors__icontains=query)
         )
         return res
 
