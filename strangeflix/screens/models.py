@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
-
+from django.shortcuts import reverse
 
 PLAN_CHOICES = {
     ('N','No Active Plans'),
@@ -9,7 +9,7 @@ PLAN_CHOICES = {
     ('H','6 Months Plan'),
     ('Y','Yearly Plan')
 }
-from django.shortcuts import reverse
+
 
 # Create your models here.
 class Movie(models.Model):  
@@ -18,9 +18,15 @@ class Movie(models.Model):
     file = models.FileField()
     thumbnail = models.FileField()
     views = models.IntegerField()
+    imdb = models.FloatField(null=True,blank=True)
+    director = models.CharField(null=True,blank=True, max_length=50)
+    actors =  models.CharField(null=True,blank=True , max_length=100)
+    year = models.IntegerField(null=True,blank=True)
 
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('screens:movie_detail', args=[str(self.id)])
 
 
 class Plans(models.Model):
