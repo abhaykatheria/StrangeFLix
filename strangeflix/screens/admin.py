@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie , UserProfile, Plans
+from .models import Movie , UserProfile, Plans, Payment
 # Register your models here.
 
 class PlansAdmin(admin.ModelAdmin):
@@ -22,6 +22,12 @@ class MoveAdmin(admin.ModelAdmin):
     list_filter = ['genre']
     search_fields = ['name']
 
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ['user','amount','timestamp']
+    list_filter = ['amount']
+    search_fields = ['user']
+
 admin.site.register(Plans,PlansAdmin)
 admin.site.register(Movie,MoveAdmin)
 admin.site.register(UserProfile,UserProfileAdmin)
+admin.site.register(Payment,PaymentAdmin)

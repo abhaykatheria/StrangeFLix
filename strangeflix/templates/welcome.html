@@ -14,11 +14,12 @@
         {  
         background: rgba(0,0,0,0.2);   
         }
+
     </style>
 </head>
 <body>
 <div class="bgded overlay light container-fluid" style="background-image:url('show_media/images/doctor_strange2.jpg'); background-size: cover; height: 100%; background-repeat: no-repeat;">
-    <div style="background: rgba(0,0,0,0.6); height: 100%; width: 100%;" >  
+    <div class="container-fluid" style="background: rgba(0, 0, 0, 0.5); height: 100%; width: 100%;" >  
     <nav class=" navbar navbar-expand-lg  inline-block">
         <a class="navbar-brand " style="font-size:2vw; font-weight: bold;" href="#">StrangeFlix</a>
 
@@ -40,7 +41,7 @@
                         {% if redirect_field_value %}
                             <input type="hidden " name="{{ redirect_field_name }} " value="{{ redirect_field_value }} "/>
                         {% endif %}
-                            <button type="submit " class="btn btn-primary btn-sm ">{% trans 'Sign Out' %}</button>
+                    <span style="color: white; font-size: large;" >    Welcome {{ user.username }} &nbsp </span> <button type="submit " class="btn btn-primary btn-sm ">{% trans 'Sign Out' %}</button>
                     </form>
 
                 {% else %}
@@ -53,11 +54,11 @@
     <div style="padding:10% 20%; max-width:978x; position: center; color: antiquewhite; "> 
     <article>
         <h3 class="heading" style="font-size:3vw;">STRANGEFLIX</h3>
-
-        <h2 style="font-size:2.3vw">Watch Unlimited Movies, Shows and more.</h2>
+        <br>
+        <h2 style="font-size:2.3vw; font-weight:900 ">Watch Unlimited Movies, Shows and more.</h2>
 
         <p style="font-size:1.5vw;"">Enjoy best quality vedios anywhere, anytime!<br>Start now by signing in.  </p>
-        <a class="btn btn-primary" style="font-size:1vw;" href="http://127.0.0.1:8000/accounts/login/ ">Login/Sign-up</a>
+        <a class="btn btn-primary" style="font-size:1.2vw; font-weight: 800;" href="http://127.0.0.1:8000/accounts/login/ ">Login/Sign-up</a>
     </article>
     </div>
 

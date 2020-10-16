@@ -37,8 +37,23 @@ class UserProfile(models.Model):
     is_active_plan = models.BooleanField(default=False)
     plan_buy_date = models.DateTimeField(auto_now=False,null=True,blank=True)
     plan = models.ForeignKey(Plans, on_delete=models.CASCADE,null=True,blank=True)
+    payment = models.ForeignKey(
+        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
+        return self.user.username
+
+class Payment(models.Model):
+    charge_id = models.CharField(max_length=50)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL, blank=True, null=True)
+    amount = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.user is None:
+            print("Ther is not user found!")
+            return "User Not found"
         return self.user.username
 
 def userprofile_receiver(sender, instance, created, *args, **kwargs):
