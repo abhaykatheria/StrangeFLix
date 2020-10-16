@@ -17,7 +17,11 @@ class MoveAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'genre',
-        'views'
+        'views',
+        'imdb',
+        'director',
+        'year',
+        'actors'
     ]
     list_filter = ['genre']
     search_fields = ['name']

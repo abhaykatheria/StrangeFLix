@@ -3,14 +3,17 @@ from .views import (
     HomeView, WelcomeScreen,
     PriceView, PaymentView,
     SelectPlanView, MovieDetailView,
-
+    SearchResultsView,
     payment_complete,
+    s
 )
 
 app_name = "screens"
 
 urlpatterns = [
     #path('', welcome_screen,name='home'),
+    path('s/',s,name="s"),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
     path('', WelcomeScreen.as_view(), name="welcome"),
     path('loggedin/', HomeView.as_view(), name="loggedin"),
     path('price-list/', PriceView.as_view(), name="price"),

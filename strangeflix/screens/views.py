@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.conf import settings
 import json
 import stripe
-
+from django.db.models import Q
 # `source` is obtained with Stripe.js; see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -27,12 +27,26 @@ class MovieDetailView(DetailView):
     template_name = "movie_detail.html"
 
 
+class SearchResultsView(ListView):
+    model = Movie
+    template_name = 'search_results.html'
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        res = Movie.objects.filter(
+            Q(name__icontains=query) | Q(genre__icontains=query)
+        )
+        return res
+
 def home(request):
     context = {
         'items': Movie.objects.all()
     }
     return render(request, "home.html", context)
-
+def s(request):
+    context = {
+        'items': Movie.objects.all()
+    }
+    return render(request,"s.html")
 
 class WelcomeScreen(TemplateView):
     template_name = "welcome.html"

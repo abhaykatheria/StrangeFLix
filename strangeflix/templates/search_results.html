@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <title>StrangeFlix</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+
+</head>
+
+<body style="background-color: black;color: aliceblue;">
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
+        <a class="navbar-brand " href="#">StrangeFlix</a>
+        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText ">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link " href="# ">Pricing</a>
+                </li>
+            </ul>
+            <span class="navbar-text ">
+            {% load i18n %}
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
+                    </form>
+                {% else %}
+                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
+                {% endif %}
+            </span>
+        </div>
+    </nav>
+
+    <ul>
+    {% for movie in object_list %}
+    <li>
+        {{ movie.name }}, {{ movie.genre }}
+    </li>
+    {% endfor %}
+    </ul>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
+
+</html>
