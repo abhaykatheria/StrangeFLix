@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Comment
 PLAN_CHOICES = (
     ('M','Rs 160 : Monthly Plan ( 30 days )'),
     ('H','Rs 900 : 6 Months Plan ( 180 days )'),
@@ -12,3 +12,9 @@ class SelectPlanForm(forms.Form):
 
 class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('author', 'text',)

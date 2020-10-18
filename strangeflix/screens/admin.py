@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie , UserProfile, Plans, Payment
+from .models import Movie , UserProfile, Plans, Payment, Comment
 # Register your models here.
 
 class PlansAdmin(admin.ModelAdmin):
@@ -33,5 +33,6 @@ class PaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(Plans,PlansAdmin)
 admin.site.register(Movie,MoveAdmin)
+admin.site.register(Comment)
 admin.site.register(UserProfile,UserProfileAdmin)
 admin.site.register(Payment,PaymentAdmin)

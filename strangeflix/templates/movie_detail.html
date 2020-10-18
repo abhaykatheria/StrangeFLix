@@ -6,11 +6,10 @@
     <title>StrangeFlix</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
@@ -60,20 +59,69 @@
     </p>
     </video>
     </div>
-    <div class=" jumbotron jumbotron-fluid " style="background-color: black; margin-left: 100px; margin-right: 100px; padding-top:20px;">
+    <div class=" jumbotron jumbotron-fluid " style="background-color: black; margin-left: 100px; margin-right: 100px; padding-top:20px;padding-bottom: 0px;">
         <div class="card" style="background-color:black; ">
             <h2 class="display-3">{{ object.name }}</h2>
             <div class="card-body">
-                genre : {{ object.genre }}
+                <div class="row">
+                    <div class="col">
+                        <h4> Genre : {{ object.genre }} </h4>
+                        <br>
+                        <h4> Director : {{ object.director }} </h4>
+                        <br>
+                        <h4> Actor : {{ object.actors }} </h4>
+                    </div>>
+                    <div class="col">
+                        <h4> View : {{ object.views}} </h4>
+                        <br>
+                        <h4> IMDB : {{ object.imdb }} </h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class=" jumbotron jumbotron-fluid " style="background-color: black; margin-left: 100px; margin-right: 100px; padding-top:0px;">
+        <div class="d-flex flex-row justify-content-between align-items-center action-collapse p-2" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1">
+            <h1 class="display-4"><span>Comments</span></h1> 
+        </div>
+        <div id="collapse-1" class="collapse">
+            {% for comment in object.comments.all %}
+            <div class="commented-section mt-2">
+                <div class="d-flex flex-row align-items-center commented-user">
+                    <h5 class="mr-2">{{ comment.author }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{ comment.created_date }}</span>
+                </div>
+                <div class="comment-text-sm"><span>{{ comment.text }}</span></div>
+            </div>
+            {% empty %}
+            <p>No comments here yet :(</p>
+            {% endfor %}
+        </div>
+        <a class="btn brn-lg btn-blue" href="{% url 'screens:add_comment_to_post' pk=object.pk %}">Add comment</a>
+    </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <script>
+        $(document).ready(function() {
+
+
+
+            $('#collapse-1').on('shown.bs.collapse', function() {
+
+                $(".servicedrop").addClass('fa-chevron-up').removeClass('fa-chevron-down');
+            });
+
+            $('#collapse-1').on('hidden.bs.collapse', function() {
+                $(".servicedrop").addClass('fa-chevron-down').removeClass('fa-chevron-up');
+            });
+
+        });
+    </script>
 </body>
 
 </html>

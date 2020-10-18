@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Movie, Plans, UserProfile, Payment
 from django.views.generic import TemplateView, ListView, DeleteView
 from django.utils.decorators import method_decorator
-from .forms import SelectPlanForm, PaymentForm
+from .forms import SelectPlanForm, PaymentForm, CommentForm
 from django.views.generic import TemplateView, ListView, DeleteView, DetailView
 from django.contrib import messages
 from django.conf import settings
@@ -142,3 +142,16 @@ class PaymentView(LoginRequiredMixin, TemplateView):
                 return redirect("screens:planform")
         else:
             return redirect("screens:planform")
+
+def add_comment_to_post(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.movie = movie
+            comment.save()
+            return redirect('screens:movie_detail', pk=movie.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})

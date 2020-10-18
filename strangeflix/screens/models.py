@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.shortcuts import reverse
+from django.utils import timezone
 
 PLAN_CHOICES = {
     ('N','No Active Plans'),
@@ -29,6 +30,22 @@ class Movie(models.Model):
         return reverse('screens:movie_detail', args=[str(self.id)])
 
 
+
+class Comment(models.Model):
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+
 class Plans(models.Model):
     plan_type = models.CharField(choices=PLAN_CHOICES,default='N',blank=True, null=True,max_length=2)
     plan_price = models.IntegerField(default=0)
@@ -39,7 +56,7 @@ class Plans(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE, blank=True, null=True)
+                            on_delete=models.CASCADE, blank=True, null=True)
     is_active_plan = models.BooleanField(default=False)
     plan_buy_date = models.DateTimeField(auto_now=False,null=True,blank=True)
     plan = models.ForeignKey(Plans, on_delete=models.CASCADE,null=True,blank=True)
