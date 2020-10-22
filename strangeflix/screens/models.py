@@ -60,6 +60,7 @@ class UserProfile(models.Model):
     is_active_plan = models.BooleanField(default=False)
     plan_buy_date = models.DateTimeField(auto_now=False,null=True,blank=True)
     plan = models.ForeignKey(Plans, on_delete=models.CASCADE,null=True,blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="show_media/")
     payment = models.ForeignKey(
         'Payment', on_delete=models.SET_NULL, blank=True, null=True)
 

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Movie, Plans, UserProfile, Payment
 from django.views.generic import TemplateView, ListView, DeleteView
 from django.utils.decorators import method_decorator
-from .forms import SelectPlanForm, PaymentForm, CommentForm
+from .forms import SelectPlanForm, PaymentForm, CommentForm, ProfileForm
 from django.views.generic import TemplateView, ListView, DeleteView, DetailView
 from django.contrib import messages
 from django.conf import settings
@@ -71,6 +71,7 @@ class SelectPlanView(ListView):
             # print(form.cleaned_data.get('plan_option'))
             # print(plan.plan_length)
             if self.request.user.is_anonymous is not True:
+                print(self.request.user.username)
                 userprofile = UserProfile.objects.get(user=self.request.user)
                 userprofile.plan = plan
                 userprofile.save()
@@ -92,7 +93,7 @@ def payment_complete(request):
     )
     payment.save()
     userprofile.is_active_plan = True
-    userprofile.plan_buy_date = payment.tiimestamp
+    userprofile.plan_buy_date = payment.timestamp
     userprofile.payment = payment
     userprofile.save()
     return redirect("loggedin")
@@ -131,7 +132,7 @@ class PaymentView(LoginRequiredMixin, TemplateView):
                 )
                 payment.save()
                 userprofile.is_active_plan = True
-                userprofile.plan_buy_date = payment.tiimestamp
+                userprofile.plan_buy_date = payment.timestamp
                 userprofile.payment = payment
                 userprofile.save()
                 return redirect("screens:loggedin")
@@ -155,3 +156,25 @@ def add_comment_to_post(request, pk):
     else:
         form = CommentForm()
     return render(request, 'add_comment_to_post.html', {'form': form})
+
+
+class ProfileView(LoginRequiredMixin,ListView):
+    def get(self, *args, **kwargs):
+        profile = UserProfile.objects.get(user=self.request.user)
+        form = ProfileForm()
+        context = {
+            'profile': profile,
+            'form': form
+        }
+        return render(self.request, "profile.html", context)
+    def post(self, *args,**kwargs):
+        form = ProfileForm(self.request.POST,self.request.FILES)
+        if form.is_valid():
+            print("valid")
+            profile = UserProfile.objects.get(user=self.request.user)
+            profile.image = form.cleaned_data["image"]
+            profile.save()
+        else:
+            print("form not valid")
+        return redirect("screens:profile")
+    

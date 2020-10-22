@@ -1,0 +1,92 @@
+{% extends 'new_base.html' %}
+
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <title>Profile</title>
+    <style>
+        .border3 {
+            border-width: 6px !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;color: aliceblue; ">
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-dark" style="bo">
+        <a class="navbar-brand " href="#">StrangeFlix</a>
+        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText ">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link " href="http://127.0.0.1:8000/price-list/">Pricing</a>
+                </li>
+            </ul>
+            <span class="navbar-text ">
+            {% load i18n %}
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
+                    </form>
+                {% else %}
+                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
+                {% endif %}
+            </span>
+        </div>
+    </nav>
+    <div class="container "  style=" height: 100%; padding: 3%;  " >
+        <h3 style="text-align: center; color: yellow; font-weight: 400;">-- Profile --</h3>
+        <hr class="border-bottom">
+        <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6" style="padding: 3vw;">
+                    <!-- add image here --> 
+                    {% if profile.image %}
+                        <img src="{{profile.image.url}}" alt="Not Found" style="height: 10vw; width: 10vw;" class="border3 border border-primary  rounded-circle">
+                    {% else %}
+                        <!-- WE CAN ALSO PROVIDE DEFAULT IMAGE -->
+                        <img src="" alt="No image" style="height: 10vw; width: 10vw; padding: 15%; font-size: 1vw;" class="border3 border border-primary  rounded-circle">
+                    {% endif %}
+                    
+                </div>
+                <div class="col-sm-6" >
+                    <br>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h4>Username: <span style="color: burlywood;"> {{profile.user.username}}<span></h4>
+                        {% if profile.is_active_plan %}
+                            <h4>Prime Member: <span style="color: burlywood;"> Yes<span></span></h4>
+                        {% else %}
+                            <h4>Prime Member: <span style="color: burlywood;"> No<span></span></h4>
+                        {% endif %}
+                        <hr class="border">
+                        {% if profile.user.has_usable_password %}
+                            <h4><a href="http://127.0.0.1:8000/accounts/password/change/">change password</a></h4>
+                        {% else %}
+                            <h4><a href="http://127.0.0.1:8000/accounts/password/set/">set password</a></h4>
+                        {% endif %}
+                        <hr class="border">
+                        <h5>Change Profile Pic</h5>
+                        <input type="file" class="btn" id='image' name="image"/> 
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+          </div>
+    </div>
+
+</body>
+</html>
+{% endblock %}

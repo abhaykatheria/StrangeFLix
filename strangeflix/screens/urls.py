@@ -6,7 +6,8 @@ from .views import (
     SearchResultsView,
     payment_complete,
     s,
-    add_comment_to_post
+    add_comment_to_post,
+    ProfileView
 )
 
 app_name = "screens"
@@ -23,5 +24,6 @@ urlpatterns = [
     path('planform/', SelectPlanView.as_view(), name="planform"),
     #path('/accounts', include('allauth.urls')),
     path('<int:pk>/', MovieDetailView.as_view(), name='movie_detail'),
-    path('<int:pk>/comment/', add_comment_to_post, name='add_comment_to_post')
+    path('<int:pk>/comment/', add_comment_to_post, name='add_comment_to_post'),
+    path('profile/',ProfileView.as_view(), name="profile"),
 ]

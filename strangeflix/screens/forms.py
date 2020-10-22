@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, UserProfile
 PLAN_CHOICES = (
     ('M','Rs 160 : Monthly Plan ( 30 days )'),
     ('H','Rs 900 : 6 Months Plan ( 180 days )'),
@@ -18,3 +18,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text',)
+
+
+class ProfileForm(forms.Form):
+    image = forms.ImageField()
