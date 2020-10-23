@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -10,11 +11,88 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static '/car.css' %}">
 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
+
+    <style>
+      p {
+        font-size: 18px;
+      }
+      button {
+        background-color: blueviolet;
+        color: aliceblue;
+        font-weight: 800;
+        border-radius: 15px;
+        padding: 0.3%;
+        padding-bottom: 0.5%;
+        padding-left: 2%;
+        padding-right: 2%;
+      }
+      button:hover {
+        background-color: aliceblue;
+        color: blueviolet;
+        font-weight: 800;
+        border-radius: 15px;
+        padding: 0.3%;
+        padding-bottom: 0.5%;
+        padding-left: 2%;
+        padding-right: 2%;  
+        border: 3px solid blueviolet;
+      }
+      input[type=text] {
+        background: transparent;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid rgb(229, 206, 250);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+      }
+      input[type=text]:focus {
+        border: 2px solid blueviolet;
+      }
+      input[type=password] {
+        background: transparent;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid rgb(229, 206, 250);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+      }
+      input[type=password]:focus {
+        border: 2px solid blueviolet;
+      }
+      input[type=email] {
+        background: transparent;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid rgb(229, 206, 250);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+      }
+      input[type=email]:focus {
+        border: 2px solid blueviolet;
+      }
+      ul {
+         font-size: 18px;
+      }
+
+    </style>
+
   </head>
-  <body>
+  <body  >
     {% block body %}
 
     {% if messages %}
@@ -28,7 +106,7 @@
     </div>
     {% endif %}
 
-    <div>
+    <!-- <div>
       <strong>Menu:</strong>
       <ul>
         {% if user.is_authenticated %}
@@ -39,9 +117,16 @@
         <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
         {% endif %}
       </ul>
-    </div>
-    {% block content %}
-    {% endblock %}
+    </div> -->
+    {% include "navbar.html" %}
+                  <div class="jumbotron" style="height: 100vh;" >
+                    <div class="container ">
+                    <div class=" shadow-lg p-5 mb-4 bg-white " >
+                      {% block content %}
+                      {% endblock %}
+                    </div>
+                    </div>  
+                  </div>
     {% endblock %}
     {% block extra_body %}
     {% endblock %}
