@@ -28,34 +28,8 @@
 </head>
 
 <body style="background-color: black;color: aliceblue;">
-
-
-<nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
-    <a class="navbar-brand " href="#">StrangeFlix</a>
-    <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
-        <span class="navbar-toggler-icon "></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarText ">
-        <ul class="navbar-nav mr-auto ">
-            <li class="nav-item ">
-            </li>
-        </ul>
-        <span class="navbar-text ">
-            {% load i18n %}
-            {% if user.is_authenticated %}
-                <form method="post" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                    {% endif %}
-                    Welcome {{ user.username }} &nbsp; <button type="submit" class="btn btn-primary btn-sm "> {% trans 'Sign Out' %}</button>
-                    </form>
-                {% else %}
-                <a class="btn btn-primary btn-sm " href="http://127.0.0.1:8000/accounts/login/ " role="button ">Login/Sign-up</a>
-                {% endif %}
-            </span>
-    </div>
-</nav>
+    {% include 'navbar.html' %}
+    
 
 <div class="container" style="margin-top: 1%;  margin-bottom: 5%; height: 70%; padding: 1%; padding-left: 10%; padding-right: 10%;">
     <h3 style="text-align: left; font-size: 2vw; color: rgb(171, 171, 250);"> Choose the plan that's right for you. </h3>

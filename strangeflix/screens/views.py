@@ -32,7 +32,7 @@ date_format = "%Y-%m-%d"
 
 def is_prime(self):
     userprofile = UserProfile.objects.get(user=self.request.user)
-    if userprofile.plan is None or userprofile.plan.plan_buy_date is None:
+    if userprofile.plan is None or userprofile.plan_buy_date is None:
         return False
     user_date = datetime.strptime(str(userprofile.plan_buy_date.date()), date_format)
     my_date = datetime.strptime(str(datetime.now().date()), date_format) 
@@ -139,7 +139,7 @@ def payment_complete(request):
     userprofile.plan_buy_date = payment.timestamp
     userprofile.payment = payment
     userprofile.save()
-    return redirect("loggedin")
+    return redirect("profile")
 
 
 class PaymentView(LoginRequiredMixin, TemplateView):
@@ -178,7 +178,7 @@ class PaymentView(LoginRequiredMixin, TemplateView):
                 userprofile.plan_buy_date = payment.timestamp
                 userprofile.payment = payment
                 userprofile.save()
-                return redirect("screens:loggedin")
+                return redirect("screens:profile")
             except stripe.error.CardError as e:
                 body = e.json_body
                 err = body.get('error', {})
