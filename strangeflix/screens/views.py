@@ -12,15 +12,54 @@ from django.conf import settings
 import json
 import stripe
 from django.db.models import Q
+from datetime import datetime, timezone
+from allauth.account.views import PasswordChangeView, PasswordSetView
 # `source` is obtained with Stripe.js; see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    def get_success_url(self):
+        success_url = 'http://127.0.0.1:8000/profile/' # <- choose your URL
+        return success_url
+
+class CustomPasswordSetView(LoginRequiredMixin, PasswordSetView):
+    def get_success_url(self):
+        success_url = 'http://127.0.0.1:8000/profile/' # <- choose your URL
+        return success_url
+
+date_format = "%Y-%m-%d"
+
+def is_prime(self):
+    userprofile = UserProfile.objects.get(user=self.request.user)
+    if userprofile.plan is None or userprofile.plan.plan_buy_date is None:
+        return False
+    user_date = datetime.strptime(str(userprofile.plan_buy_date.date()), date_format)
+    my_date = datetime.strptime(str(datetime.now().date()), date_format) 
+    delta = (my_date - user_date).days
+    plan_length = userprofile.plan.plan_length
+    print(delta)
+    print(plan_length)
+    if delta <= plan_length:
+        return True
+    else:
+        userprofile.is_active_plan = False
+        userprofile.save()
+        return False
+    
+
 
 @method_decorator(login_required, name='dispatch')
 class HomeView(ListView):
-    model = Movie
-    template_name = "home.html"
+    def get(self,*args,**kwargs):
+        if is_prime(self):
+            print("Prime user")
+        else:
+            print("Not Prime user")
+        context = {
+            'object_list': Movie.objects.all()
+        }
+        return render(self.request, "home.html", context)
 
 class MovieDetailView(DetailView):
     model = Movie
@@ -49,7 +88,11 @@ def s(request):
     return render(request,"s.html")
 
 class WelcomeScreen(TemplateView):
-    template_name = "welcome.html"
+    def get(self,*args,**kwargs):
+        if self.request.user.is_anonymous is True:
+            return render(self.request, "welcome.html")
+        else:
+            return redirect("screens:loggedin")
 
 
 class PriceView(TemplateView):

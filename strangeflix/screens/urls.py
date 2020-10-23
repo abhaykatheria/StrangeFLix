@@ -7,7 +7,8 @@ from .views import (
     payment_complete,
     s,
     add_comment_to_post,
-    ProfileView
+    ProfileView, CustomPasswordChangeView,
+    CustomPasswordSetView
 )
 
 app_name = "screens"
@@ -26,4 +27,10 @@ urlpatterns = [
     path('<int:pk>/', MovieDetailView.as_view(), name='movie_detail'),
     path('<int:pk>/comment/', add_comment_to_post, name='add_comment_to_post'),
     path('profile/',ProfileView.as_view(), name="profile"),
+    path('accounts/password/change/',
+         CustomPasswordChangeView.as_view(),
+         name='account_change_password'),
+    path('accounts/password/set/',
+         CustomPasswordSetView.as_view(),
+         name='account_set_password'),
 ]
