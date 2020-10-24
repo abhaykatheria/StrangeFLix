@@ -1,7 +1,7 @@
 {% extends 'new_base.html' %}
 
 {% block extra_head %}
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style media="screen">
     #stripeBtnLlabel {
         font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -71,10 +71,7 @@
     }
 
 
-    .card {
-        padding: 2%;
-        padding-right: 4%;
-    }
+
 
     .StripeElement {
         box-sizing: border-box;
@@ -105,6 +102,8 @@
 
 <body class="grey lighten-3">
     {% include 'navbar.html' %}
+    <div class="conainer-fluid jumbotron " style="height: 100vh;">
+        
     <!--Main layout-->
     <main>
 
@@ -113,16 +112,17 @@
         <div class="container wow fadeIn">
 
             <!-- Heading -->
-            <h2 class="my-5 h2 text-center">Payment</h2>
+            <h1 class="my-5 h2 text-center" style="font-weight: 900; color: #32325D;">Payment</h1>
 
             <!--Grid row-->
-            <div class="row">
+            <div class="row" >
 
                 <!--Grid column-->
-                <div class="col-md-12 mb-4">
-
+                <div class="col-md-12 mb-4" >
+                    <div class="shadow-lg p-5 mb-4 bg-white">
                     <!--Card-->
-                    <div class="card">
+                    
+                        
                         <!--Card content-->
                         <script src="https://js.stripe.com/v3/"></script>
                         <div class="container-fluid" align="center">
@@ -179,9 +179,9 @@
 
 
 
-                    </div>
+                    
                     <!--/.Card-->
-
+                    </div>
                 </div>
                 <!--Grid column-->
 
@@ -192,6 +192,7 @@
         </div>
     </main>
     <!--Main layout-->
+    </div>
 
 </body>
 
