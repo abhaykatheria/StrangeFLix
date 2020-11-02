@@ -47,19 +47,21 @@
         <div class="d-flex flex-row justify-content-between align-items-center action-collapse p-2" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1">
             <h1 class="display-4"><span>Comments</span></h1> 
         </div>
-        <div id="collapse-1" class="collapse">
+        <a class="btn brn-lg btn-blue" href="{% url 'screens:add_comment_to_post' pk=object.pk %}">Add comment</a>
+        <div class="container" style="margin-left: 1%;" >
             {% for comment in object.comments.all %}
+            <hr class="border" style="border-color: blueviolet;">
             <div class="commented-section mt-2">
                 <div class="d-flex flex-row align-items-center commented-user">
-                    <h5 class="mr-2">{{ comment.author }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{ comment.created_date }}</span>
+                    <h5 class="mr-2">{{ comment.author }}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2" style="color: goldenrod; ">{{ comment.created_date }}</span>
                 </div>
-                <div class="comment-text-sm"><span>{{ comment.text }}</span></div>
+                 <div class="comment-text-sm"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ comment.text }}</span></div>
             </div>
             {% empty %}
             <p>No comments here yet :(</p>
             {% endfor %}
         </div>
-        <a class="btn brn-lg btn-blue" href="{% url 'screens:add_comment_to_post' pk=object.pk %}">Add comment</a>
+        
     </div>
 
 
