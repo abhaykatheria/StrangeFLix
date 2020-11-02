@@ -82,7 +82,7 @@
     <div class="container-fluid" style="padding-left: 5%;">
     <div class="jumbotron container-fluid" style="background-color: black;" ">
         <h1 class=" display-4 ">
-            Top 5 Course in India
+            Most Popular
         </h1>
 
         <div class="carouSel ">
@@ -91,10 +91,17 @@
                 <div class="carouSel-tile">
                     <!--Card image-->
                     <div class="view overlay">
-                        <a href="{{ item.get_absolute_url }}" ">
+                        {% if prime or item.prime_show is False %}
+                        <a href="{{ item.get_absolute_url }}">
                                 <h6 style="text-align: center; "> {{item.name}} </h6>
                                 <img class="carousel-img " src="{{ item.thumbnail.url }} " alt=" ">
                         </a>
+                        {% else %}
+                        <a href="http://127.0.0.1:8000/price-list/">
+                            <h6 style="text-align: center; "> {{item.name}} </h6>
+                            <img class="carousel-img " src="{{ item.thumbnail.url }} " alt=" ">
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}

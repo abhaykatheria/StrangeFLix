@@ -16,14 +16,15 @@ class UserProfileAdmin(admin.ModelAdmin):
 class MoveAdmin(admin.ModelAdmin):
     list_display = [
         'name',
+        'prime_show',
         'genre',
         'views',
         'imdb',
         'director',
         'year',
-        'actors'
+        'actors',
     ]
-    list_filter = ['genre']
+    list_filter = ['genre','prime_show']
     search_fields = ['name']
 
 class PaymentAdmin(admin.ModelAdmin):

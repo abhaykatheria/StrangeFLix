@@ -40,7 +40,7 @@ def is_prime(self):
     plan_length = userprofile.plan.plan_length
     print(delta)
     print(plan_length)
-    if delta <= plan_length:
+    if delta <= plan_length and userprofile.is_active_plan is True :
         return True
     else:
         userprofile.is_active_plan = False
@@ -54,16 +54,23 @@ class HomeView(ListView):
     def get(self,*args,**kwargs):
         if is_prime(self):
             print("Prime user")
+            context = {
+                'object_list': Movie.objects.all(),
+                'prime': True,
+            }
         else:
             print("Not Prime user")
-        context = {
-            'object_list': Movie.objects.all()
-        }
+            context = {
+                'object_list': Movie.objects.all(),
+                'prime': False,
+            }
         return render(self.request, "home.html", context)
 
+@method_decorator(login_required, name='dispatch')
 class MovieDetailView(DetailView):
     model = Movie
     template_name = "movie_detail.html"
+
 
 
 class SearchResultsView(ListView):

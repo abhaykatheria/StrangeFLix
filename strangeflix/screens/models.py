@@ -23,6 +23,7 @@ class Movie(models.Model):
     director = models.CharField(null=True,blank=True, max_length=50)
     actors =  models.CharField(null=True,blank=True , max_length=100)
     year = models.IntegerField(null=True,blank=True)
+    prime_show = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
