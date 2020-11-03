@@ -18,6 +18,10 @@ from allauth.account.views import PasswordChangeView, PasswordSetView
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
+
+
+
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     def get_success_url(self):
         success_url = 'http://127.0.0.1:8000/profile/' # <- choose your URL
@@ -227,4 +231,9 @@ class ProfileView(LoginRequiredMixin,ListView):
         else:
             print("form not valid")
         return redirect("screens:profile")
+
+
+class Enjoy():
+    data = 3
+    # testing only
     

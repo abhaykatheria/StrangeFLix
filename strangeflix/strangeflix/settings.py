@@ -148,7 +148,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/show_media/'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'show_media')
 
-
+AWS_SECRET_ACCESS_KEY="W2WAZhMAeherUd00fhTcKbd/W6SowG55PxedQatP"
+AWS_ACCESS_KEY_ID=" AKIAWRV6B22ZPPHRLYMX"
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'strangeflix'
